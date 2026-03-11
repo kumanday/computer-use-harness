@@ -1,0 +1,24 @@
+# Qwen provider configuration
+# Backend options: qwen-api, openrouter, fireworks, local
+
+provider: qwen
+model: Qwen/Qwen3.5-35B-A3B
+
+# Backend selection (default: qwen-api)
+# Options: qwen-api, openrouter, fireworks, local
+backend: qwen-api
+
+# API key environment variable (auto-detected based on backend)
+# qwen-api: QWEN_API_KEY
+# openrouter: OPENROUTER_API_KEY
+# fireworks: FIREWORKS_API_KEY
+# local: QWEN_API_KEY (optional for local)
+api_key_env: QWEN_API_KEY
+
+mode: openai_compatible_tools
+vision_enabled: true
+
+# Model parameters
+extra:
+  max_tokens: 4096
+  temperature: 0.7

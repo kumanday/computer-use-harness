@@ -1,0 +1,17 @@
+# Qwen via OpenRouter
+# https://openrouter.ai/models?q=qwen
+
+provider: qwen
+model: qwen/qwen3.5-397b-a17b
+
+backend: openrouter
+
+# API key from https://openrouter.ai/keys
+api_key_env: OPENROUTER_API_KEY
+
+mode: openai_compatible_tools
+vision_enabled: true
+
+extra:
+  max_tokens: 4096
+  temperature: 0.7

@@ -1,0 +1,137 @@
+[project]
+name = "cuh"
+version = "0.1.0"
+description = "Computer Use Harness - An open-source, provider-neutral computer-use platform for desktop and browser automation"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+authors = [{ name = "Leonardo Gonzalez" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "openai>=1.0.0",
+    "httpx>=0.27.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.30.0",
+    "sse-starlette>=2.0.0",
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0.0",
+    "pillow>=10.0.0",
+    "cua-computer>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.5.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+openhands = [
+    "openhands-sdk>=0.1.0",
+]
+qwen = [
+    "transformers>=4.40.0",
+]
+
+[project.scripts]
+cuh = "cuh.cli.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cuh"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "C4",
+    "DTZ",
+    "T10",
+    "EM",
+    "EXE",
+    "ISC",
+    "ICN",
+    "G",
+    "INP",
+    "PIE",
+    "PYI",
+    "PT",
+    "Q",
+    "RSE",
+    "RET",
+    "SLF",
+    "SLOT",
+    "SIM",
+    "TID",
+    "TCH",
+    "INT",
+    "ARG",
+    "PTH",
+    "PD",
+    "PL",
+    "TRY",
+    "NPY",
+    "RUF",
+]
+ignore = [
+    "E501",
+    "PLR0913",
+    "PLR0911",
+    "PLR0912",
+    "PLR0915",
+    "PLC0415",
+    "TRY003",
+    "TRY300",
+    "TRY301",
+    "EM101",
+    "EM102",
+    "ARG001",
+    "ARG002",
+    "SIM102",
+    "B027",
+    "RUF006",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG001", "PLR2004", "S101", "B017", "PT011"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[dependency-groups]
+dev = [
+    "types-pyyaml>=6.0.12.20250915",
+]

@@ -1,0 +1,6 @@
+kind: cua_host
+name: local-host
+api_host: 127.0.0.1
+api_port: 8000
+os_type: macos
+telemetry_enabled: false

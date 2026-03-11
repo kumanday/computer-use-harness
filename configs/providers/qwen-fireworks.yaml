@@ -1,0 +1,17 @@
+# Qwen via Fireworks AI
+# https://fireworks.ai/models
+
+provider: qwen
+model: accounts/fireworks/models/qwen3p5-397b-a17b
+
+backend: fireworks
+
+# API key from https://fireworks.ai/account/api-keys
+api_key_env: FIREWORKS_API_KEY
+
+mode: openai_compatible_tools
+vision_enabled: true
+
+extra:
+  max_tokens: 4096
+  temperature: 0.7

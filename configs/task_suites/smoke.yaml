@@ -1,0 +1,36 @@
+name: smoke
+description: Basic smoke tests for CUH validation
+tasks:
+  - id: screenshot_describe
+    prompt: "Take a screenshot and describe what you see on the screen."
+    timeout: 60
+    success_heuristic: "screenshot captured and description provided"
+
+  - id: click_text_field
+    prompt: "Find a text input field on the screen and click on it."
+    timeout: 120
+    success_heuristic: "text field clicked"
+
+  - id: type_greeting
+    prompt: "Click on a text field and type 'Hello, World!'"
+    timeout: 120
+    success_heuristic: "text typed correctly"
+
+  - id: open_terminal
+    prompt: "Open a terminal application and run 'echo hello'"
+    timeout: 180
+    target_requirements:
+      - terminal_access
+    success_heuristic: "terminal output shows 'hello'"
+
+  - id: save_file
+    prompt: "Open a text editor, type 'Test content', and save the file as test.txt"
+    timeout: 300
+    success_heuristic: "file saved successfully"
+
+  - id: mixed_workflow
+    prompt: "Open a browser, search for 'CUH computer use', then copy the first result URL"
+    timeout: 300
+    target_requirements:
+      - browser_access
+    success_heuristic: "URL copied to clipboard"

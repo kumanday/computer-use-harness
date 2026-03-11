@@ -1,0 +1,5 @@
+provider: openai
+model: gpt-5.4
+api_key_env: OPENAI_API_KEY
+mode: responses_computer
+reasoning_effort: medium
