@@ -81,6 +81,7 @@ Options:
   -c, --config-dir PATH   Configuration directory
   -v, --verbose           Enable verbose output
   --dry-run              Show configuration without running
+  --no-policy            Disable policy checks for actions
 ```
 
 ### `cuh runs`

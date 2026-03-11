@@ -41,6 +41,7 @@ def main() -> None:
 @click.option("--config-dir", "-c", type=click.Path(exists=True), help="Configuration directory")
 @click.option("--verbose", "-v", is_flag=True, help="Enable verbose output")
 @click.option("--dry-run", is_flag=True, help="Show configuration without running")
+@click.option("--no-policy", is_flag=True, help="Disable policy checks for actions")
 def run(
     provider: str,
     model: str,
@@ -51,6 +52,7 @@ def run(
     config_dir: str | None,
     verbose: bool,
     dry_run: bool,
+    no_policy: bool,
 ) -> None:
     """Run a task with CUH."""
     settings = get_settings()
@@ -79,9 +81,12 @@ def run(
         console.print(f"  Task: {run_config.task}")
         console.print(f"  Max steps: {run_config.max_steps}")
         console.print(f"  Timeout: {run_config.timeout_seconds}s")
+        console.print(f"  Policy: {'disabled' if no_policy else 'enabled'}")
         return
 
-    asyncio.run(_run_async(run_config, target_config, provider_config, settings, verbose))
+    asyncio.run(
+        _run_async(run_config, target_config, provider_config, settings, verbose, no_policy)
+    )
 
 
 async def _run_async(
@@ -90,6 +95,7 @@ async def _run_async(
     provider_config: Any,
     settings: Settings,
     verbose: bool,
+    no_policy: bool,
 ) -> None:
     """Execute the run asynchronously."""
     event_bus = EventBus()
@@ -97,7 +103,7 @@ async def _run_async(
     event_bus.subscribe(None, stdout_handler)
 
     artifact_store = ArtifactStore(settings.runs_dir)
-    policy_engine = PolicyEngine(PolicyConfig(enabled=True))
+    policy_engine = PolicyEngine(PolicyConfig(enabled=not no_policy))
 
     console.print("[bold blue]Starting CUH run[/]")
     console.print(f"  Target: {target_config.name} ({target_config.kind.value})")
